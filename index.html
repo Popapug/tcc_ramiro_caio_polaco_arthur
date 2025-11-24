@@ -1,129 +1,245 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Painel - Império</title>
-  <link rel="stylesheet" href="style.css" />
+    <meta charset="UTF-8">
+    <title>Kings School</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js" defer></script>
 </head>
 <body>
-  <div class="palette">
-    <div class="swatch dark"></div>
-    <div class="swatch beige-dark"></div>
-    <div class="swatch beige"></div>
-    <div class="swatch red"></div>
-    <div class="swatch red-dark"></div>
-  </div>
-
-  <div class="app">
-    <aside class="sidebar">
-      <div class="brand">⚜️</div>
-      <nav>
-        <button class="nav-btn active" data-panel="login">Desktop - 1</button>
-        <button class="nav-btn" data-panel="desktop2">Desktop - 2</button>
-        <button class="nav-btn" data-panel="meuPerfil">Meu Perfil</button>
-        <button class="nav-btn" data-panel="minhaTurma">Minha Turma</button>
-        <button class="nav-btn" data-panel="atividades">Atividades</button>
-        <button class="nav-btn" data-panel="materias">Matérias</button>
-        <button class="nav-btn" data-panel="notas">Notas</button>
-      </nav>
-    </aside>
-
-    <main class="main">
-      <!-- Panel: Login (Desktop -1) -->
-      <section id="login" class="panel active">
-        <div class="card login-card">
-          <h2>Entrar</h2>
-          <form id="loginForm">
-            <label for="email">Email</label>
-            <input id="email" type="email" placeholder="seu@exemplo.com" required />
-
-            <label for="password">Senha</label>
-            <input id="password" type="password" placeholder="Senha" required />
-
-            <div class="actions">
-              <button type="submit" class="btn">Entrar</button>
+    <!-- TELA DE LOGIN -->
+    <div id="login-screen" class="login-screen">
+        <div class="login-wrapper">
+            <div class="login-logo">
+                <div class="logo-icon">🦁</div>
+                <div class="logo-text">
+                    <span class="logo-king">KING</span><br>
+                    <span class="logo-school">SCHOOL</span>
+                </div>
             </div>
 
-            <p id="loginMessage" class="msg"></p>
-          </form>
+            <div class="login-card">
+                <h2>LOGIN</h2>
+                <form id="login-form">
+                    <label for="email">E-mail:</label>
+                    <input type="email" id="email" required>
+
+                    <label for="password">Senha:</label>
+                    <input type="password" id="password" required>
+
+                    <button type="submit">Entrar</button>
+                    <p id="login-error" class="login-error">E-mail ou senha inválidos.</p>
+                </form>
+            </div>
         </div>
-      </section>
+    </div>
 
-      <!-- Panel: Desktop 2 (simplified) -->
-      <section id="desktop2" class="panel">
-        <div class="card small">
-          <h3>Notificações</h3>
-          <p>Bem-vindo ao painel secundário.</p>
+    <!-- APLICAÇÃO PRINCIPAL -->
+    <div id="app" class="app">
+        <div class="app-wrapper">
+            <div class="top-strip"></div>
+
+            <div class="app-main">
+                <!-- MENU LATERAL -->
+                <aside class="sidebar">
+                    <div class="sidebar-logo">
+                        <div class="logo-icon">🦁</div>
+                        <div class="logo-text">
+                            <span class="logo-king">KING</span><br>
+                            <span class="logo-school">SCHOOL</span>
+                        </div>
+                    </div>
+
+                    <div class="menu-panel">
+                        <button class="menu-item active" data-section="home">
+                            <span class="menu-icon">⌂</span>
+                            <span class="menu-label">Home</span>
+                        </button>
+                        <button class="menu-item" data-section="perfil">
+                            <span class="menu-icon">👤</span>
+                            <span class="menu-label">Meu Perfil</span>
+                        </button>
+                        <button class="menu-item" data-section="turma">
+                            <span class="menu-icon">👥</span>
+                            <span class="menu-label">Minha Turma</span>
+                        </button>
+                        <button class="menu-item" data-section="atividades">
+                            <span class="menu-icon">📄</span>
+                            <span class="menu-label">Atividades</span>
+                        </button>
+                        <button class="menu-item" data-section="materias">
+                            <span class="menu-icon">📚</span>
+                            <span class="menu-label">Matérias</span>
+                        </button>
+                        <button class="menu-item" data-section="notas">
+                            <span class="menu-icon">☑</span>
+                            <span class="menu-label">Notas</span>
+                        </button>
+                        <button class="menu-item" data-section="coordenacao">
+                            <span class="menu-icon">🗂</span>
+                            <span class="menu-label">Coordenação</span>
+                        </button>
+                    </div>
+                </aside>
+
+                <!-- CONTEÚDO -->
+                <main class="content-area">
+                    <!-- HOME -->
+                    <section id="section-home" class="content-section active">
+                        <div class="content-card content-card-full">
+                            <!-- área em branco, como no layout -->
+                        </div>
+                    </section>
+
+                    <!-- MEU PERFIL -->
+                    <section id="section-perfil" class="content-section">
+                        <div class="content-card perfil-card">
+                            <div class="perfil-header">
+                                <div class="perfil-avatar">
+                                    <img id="perfil-foto" src="imagens/ramiro.png" alt="Foto do aluno">
+                                </div>
+                                <div class="perfil-title">Meu Perfil</div>
+                            </div>
+                            <div class="perfil-info">
+                                <p><span class="info-label">Nome:</span> <span id="perfil-nome"></span></p>
+                                <p><span class="info-label">Idade:</span> <span id="perfil-idade"></span></p>
+                                <p><span class="info-label">Sala:</span> <span id="perfil-sala"></span></p>
+                                <p><span class="info-label">Média:</span> <span id="perfil-media"></span></p>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- MINHA TURMA -->
+                    <section id="section-turma" class="content-section">
+                        <div class="content-card turma-card">
+                            <div class="turma-list" id="turma-list">
+                                <!-- preenchido via JS -->
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- ATIVIDADES -->
+                    <section id="section-atividades" class="content-section">
+                        <div class="content-card atividades-card">
+                            <div class="atividades-header">Você tem 3 atividades</div>
+                            <div class="atividade-item">
+                                <div class="atividade-nome">Inglês</div>
+                                <div class="atividade-descricao">Página 22 do livro</div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- MATÉRIAS -->
+                    <section id="section-materias" class="content-section">
+                        <div class="content-card materias-card">
+                            <ul class="materias-list">
+                                <li>Inglês <span class="materia-seta">→</span></li>
+                                <li>História <span class="materia-seta">→</span></li>
+                                <li>Geografia <span class="materia-seta">→</span></li>
+                                <li>Matemática <span class="materia-seta">→</span></li>
+                                <li>Língua Portuguesa <span class="materia-seta">→</span></li>
+                                <li>Filosofia <span class="materia-seta">→</span></li>
+                                <li>Biologia <span class="materia-seta">→</span></li>
+                                <li>Química <span class="materia-seta">→</span></li>
+                            </ul>
+                        </div>
+                    </section>
+
+                    <!-- NOTAS -->
+                    <section id="section-notas" class="content-section">
+                        <div class="content-card notas-card">
+                            <div class="notas-table-wrapper">
+                                <table class="notas-table">
+                                    <thead>
+                                        <tr>
+                                            <th>Disciplina</th>
+                                            <th>1ª Prova</th>
+                                            <th>2ª Prova</th>
+                                            <th>Trabalho</th>
+                                            <th>Média</th>
+                                            <th>Situação</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>Inglês</td>
+                                            <td>8,0</td>
+                                            <td>9,0</td>
+                                            <td>10,0</td>
+                                            <td>9,0</td>
+                                            <td>Aprovado</td>
+                                        </tr>
+                                        <tr>
+                                            <td>História</td>
+                                            <td>7,5</td>
+                                            <td>8,0</td>
+                                            <td>9,0</td>
+                                            <td>8,2</td>
+                                            <td>Aprovado</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Geografia</td>
+                                            <td>7,0</td>
+                                            <td>7,5</td>
+                                            <td>8,0</td>
+                                            <td>7,5</td>
+                                            <td>Aprovado</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Matemática</td>
+                                            <td>6,5</td>
+                                            <td>7,0</td>
+                                            <td>7,5</td>
+                                            <td>7,0</td>
+                                            <td>Aprovado</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Língua Portuguesa</td>
+                                            <td>8,5</td>
+                                            <td>9,0</td>
+                                            <td>8,5</td>
+                                            <td>8,7</td>
+                                            <td>Aprovado</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Filosofia</td>
+                                            <td>7,0</td>
+                                            <td>8,0</td>
+                                            <td>8,5</td>
+                                            <td>7,8</td>
+                                            <td>Aprovado</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Biologia</td>
+                                            <td>6,0</td>
+                                            <td>7,0</td>
+                                            <td>7,5</td>
+                                            <td>6,8</td>
+                                            <td>Aprovado</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Química</td>
+                                            <td>5,5</td>
+                                            <td>6,5</td>
+                                            <td>7,0</td>
+                                            <td>6,3</td>
+                                            <td>Aprovado</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- COORDENAÇÃO -->
+                    <section id="section-coordenacao" class="content-section">
+                        <div class="content-card coordenacao-card">
+                            <p>Coordenação pedagógica disponível para suporte.</p>
+                        </div>
+                    </section>
+                </main>
+            </div>
         </div>
-      </section>
-
-      <!-- Panel: Meu Perfil -->
-      <section id="meuPerfil" class="panel">
-        <div class="card profile">
-          <div class="avatar">👤</div>
-          <h3 id="userName">Usuário</h3>
-          <p id="userEmail">usuario@exemplo.com</p>
-          <ul class="infoList">
-            <li>Função: Aluno</li>
-            <li>Turma: A1</li>
-          </ul>
-        </div>
-      </section>
-
-      <!-- Panel: Minha Turma -->
-      <section id="minhaTurma" class="panel">
-        <div class="card list">
-          <h3>Minha Turma</h3>
-          <ul>
-            <li>Rosana</li>
-            <li>Robertson</li>
-            <li>Outros</li>
-          </ul>
-        </div>
-      </section>
-
-      <!-- Panel: Atividades -->
-      <section id="atividades" class="panel">
-        <div class="card">
-          <h3>Atividades</h3>
-          <div class="activity">
-            <p>Entregar relatório</p>
-          </div>
-        </div>
-      </section>
-
-      <!-- Panel: Matérias -->
-      <section id="materias" class="panel">
-        <div class="card">
-          <h3>Matérias</h3>
-          <ul class="subjects">
-            <li>História</li>
-            <li>Geografia</li>
-            <li>Matemática</li>
-          </ul>
-        </div>
-      </section>
-
-      <!-- Panel: Notas -->
-      <section id="notas" class="panel">
-        <div class="card grades">
-          <h3>Notas</h3>
-          <table>
-            <thead>
-              <tr><th>Matéria</th><th>1º Bim</th><th>2º Bim</th></tr>
-            </thead>
-            <tbody>
-              <tr><td>História</td><td>8.5</td><td>9.0</td></tr>
-              <tr><td>Geografia</td><td>7.0</td><td>8.2</td></tr>
-            </tbody>
-          </table>
-        </div>
-      </section>
-
-    </main>
-  </div>
-
-  <script src="script.js"></script>
+    </div>
 </body>
 </html>

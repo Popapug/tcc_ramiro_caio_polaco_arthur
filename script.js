@@ -1,57 +1,136 @@
-// emails permitidos — apenas esses dois serão aceitos
-const ALLOWED_EMAILS = [
-  'rosana@admin.com',
-  'robertson@aluno.com'
-];
+// Usuários permitidos
+const allowedUsers = {
+    "ramiro@admin.com": {
+        nome: "Ramiro",
+        idade: "17",
+        sala: "3º Ano A",
+        media: "8,7"
+    },
+    "caio@admin.com": {
+        nome: "Caio Okuma",
+        idade: "17",
+        sala: "3º Ano A",
+        media: "8,4"
+    },
+    "arthur@admin.com": {
+        nome: "Arthur Guimarães",
+        idade: "17",
+        sala: "3º Ano B",
+        media: "8,1"
+    },
+    "gabriel@admin.com": {
+        nome: "Gabriel",
+        idade: "17",
+        sala: "3º Ano B",
+        media: "8,0"
+    }
+};
 
-// --- navegação entre painéis ---
-document.querySelectorAll('.nav-btn').forEach(btn => {
-  btn.addEventListener('click', () => {
-    document.querySelectorAll('.nav-btn').forEach(b=>b.classList.remove('active'));
-    btn.classList.add('active');
-    const panel = btn.dataset.panel;
-    document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));
-    const target = document.getElementById(panel);
-    if(target) target.classList.add('active');
-  });
+const allowedPassword = "12345";
+
+document.addEventListener("DOMContentLoaded", () => {
+    const loginScreen = document.getElementById("login-screen");
+    const app = document.getElementById("app");
+    const loginForm = document.getElementById("login-form");
+    const loginError = document.getElementById("login-error");
+
+    loginForm.addEventListener("submit", (event) => {
+        event.preventDefault();
+
+        const email = document.getElementById("email").value.trim().toLowerCase();
+        const password = document.getElementById("password").value;
+
+        if (allowedUsers[email] && password === allowedPassword) {
+            // sucesso no login
+            loginError.style.display = "none";
+            loginScreen.style.display = "none";
+            app.style.display = "block";
+
+            preencherPerfil(allowedUsers[email]);
+            preencherTurma();
+
+        } else {
+            loginError.style.display = "block";
+        }
+    });
+
+    // Navegação do menu
+    const menuItems = document.querySelectorAll(".menu-item");
+    const sections = document.querySelectorAll(".content-section");
+
+    menuItems.forEach((item) => {
+        item.addEventListener("click", () => {
+            const sectionName = item.getAttribute("data-section");
+            const targetId = `section-${sectionName}`;
+
+            // atualizar estado visual do menu
+            menuItems.forEach((btn) => btn.classList.remove("active"));
+            item.classList.add("active");
+
+            // mostrar seção correta
+            sections.forEach((sec) => {
+                if (sec.id === targetId) {
+                    sec.classList.add("active");
+                } else {
+                    sec.classList.remove("active");
+                }
+            });
+        });
+    });
 });
 
-// --- login ---
-const loginForm = document.getElementById('loginForm');
-const loginMessage = document.getElementById('loginMessage');
-const userNameEl = document.getElementById('userName');
-const userEmailEl = document.getElementById('userEmail');
+/**
+ * Preenche as informações do perfil com base no usuário logado.
+ */
+function preencherPerfil(user) {
+    const nome = document.getElementById("perfil-nome");
+    const idade = document.getElementById("perfil-idade");
+    const sala = document.getElementById("perfil-sala");
+    const media = document.getElementById("perfil-media");
 
-loginForm.addEventListener('submit', function(e){
-  e.preventDefault();
-  const email = document.getElementById('email').value.trim().toLowerCase();
-  const password = document.getElementById('password').value;
+    if (nome) nome.textContent = user.nome;
+    if (idade) idade.textContent = user.idade;
+    if (sala) sala.textContent = user.sala;
+    if (media) media.textContent = user.media;
+}
 
-  // validação: apenas emails permitidos
-  if(!ALLOWED_EMAILS.includes(email)){
-    loginMessage.textContent = 'Email não autorizado.';
-    return;
-  }
+/**
+ * Preenche a lista da turma com alguns alunos.
+ */
+function preencherTurma() {
+    const turmaList = document.getElementById("turma-list");
+    if (!turmaList) return;
 
-  // senha: exigir não-vazia (você pode ajustar regras aqui)
-  if(!password){
-    loginMessage.textContent = 'Informe a senha.';
-    return;
-  }
+    const alunos = [
+        "Ramiro",
+        "Caio Okuma",
+        "Arthur Guimarães",
+        "Polaco",
+        "Gabriel",
+        "Ana Clara",
+        "João Pedro",
+        "Mariana"
+    ];
 
-  // login bem-sucedido (simulação)
-  loginMessage.style.color = '#1a5f1a';
-  loginMessage.textContent = 'Login realizado com sucesso!';
+    turmaList.innerHTML = "";
 
-  // preencher perfil e ir para 'Meu Perfil'
-  const displayName = email.split('@')[0].replace('.', ' ');
-  userNameEl.textContent = displayName.charAt(0).toUpperCase() + displayName.slice(1);
-  userEmailEl.textContent = email;
+    alunos.forEach((nome) => {
+        const item = document.createElement("div");
+        item.className = "turma-item";
 
-  // navega para painel Meu Perfil
-  document.querySelectorAll('.nav-btn').forEach(b=>b.classList.remove('active'));
-  const perfilBtn = Array.from(document.querySelectorAll('.nav-btn')).find(b=>b.dataset.panel==='meuPerfil');
-  if(perfilBtn) perfilBtn.classList.add('active');
-  document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));
-  document.getElementById('meuPerfil').classList.add('active');
-});
+        const avatar = document.createElement("div");
+        avatar.className = "turma-avatar";
+        const avatarInner = document.createElement("div");
+        avatarInner.className = "turma-avatar-inner";
+        avatar.appendChild(avatarInner);
+
+        const nomeEl = document.createElement("div");
+        nomeEl.className = "turma-nome";
+        nomeEl.textContent = nome;
+
+        item.appendChild(avatar);
+        item.appendChild(nomeEl);
+
+        turmaList.appendChild(item);
+    });
+}

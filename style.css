@@ -1,41 +1,434 @@
-:root{
-  --red:#8b2e2a; /* painel */
-  --red-dark:#6d2623;
-  --beige:#d9d4bf; /* cards */
-  --beige-dark:#c6c3ad;
-  --dark:#0f1613; /* texto/painel lateral */
+/* CORES PRINCIPAIS (paleta) */
+:root {
+    --dark: #0A0D0D;
+    --green: #B9BAA3;
+    --light: #D8D5C9;
+    --red: #A22C29;
+    --dark-red: #902323;
+    --white: #FFFFFF;
 }
-*{box-sizing:border-box;font-family:Inter, system-ui, -apple-system, 'Segoe UI', Roboto, Arial}
-body{margin:0;background:linear-gradient(#010101, #020202);color:#0b0b0b}
-.palette{position:fixed;left:16px;top:12px;display:flex;gap:6px}
-.swatch{width:40px;height:28px;border-radius:2px;border:1px solid rgba(255,255,255,0.06)}
-.swatch.dark{background:var(--dark)}
-.swatch.beige-dark{background:var(--beige-dark)}
-.swatch.beige{background:var(--beige)}
-.swatch.red{background:var(--red)}
-.swatch.red-dark{background:var(--red-dark)}
 
-.app{display:flex;min-height:100vh;padding-left:120px}
-.sidebar{width:120px;background:var(--red);position:fixed;left:0;top:0;bottom:0;padding:18px 10px;display:flex;flex-direction:column;align-items:center;gap:12px}
-.brand{font-size:22px;color:var(--beige);margin-bottom:6px}
-.sidebar nav{display:flex;flex-direction:column;gap:8px;width:100%}
-.nav-btn{background:transparent;border:none;color:var(--beige);padding:8px 6px;border-radius:6px;text-align:left;cursor:pointer}
-.nav-btn.active{background:rgba(0,0,0,0.08)}
+/* RESET BÁSICO */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
 
-.main{flex:1;padding:40px;margin-left:120px}
-.panel{display:none}
-.panel.active{display:block}
-.card{background:var(--beige);padding:18px;border-radius:8px;box-shadow:0 6px 18px rgba(0,0,0,0.25);max-width:760px}
-.login-card{width:320px;margin-top:30px}
-.login-card h2{margin:0 0 12px 0}
-label{display:block;font-size:13px;margin-top:12px;color:var(--dark)}
-input{width:100%;padding:8px 10px;border:1px solid var(--beige-dark);border-radius:6px;margin-top:6px}
-.btn{margin-top:12px;background:var(--red-dark);color:var(--beige);border:none;padding:10px 12px;border-radius:8px;cursor:pointer}
-.msg{margin-top:8px;color:#6a1919}
-.profile{display:flex;flex-direction:column;align-items:center;gap:8px;text-align:center}
-.avatar{font-size:48px;background:rgba(0,0,0,0.03);padding:10px;border-radius:50%}
-.list ul{padding-left:16px}
-.grades table{width:100%;border-collapse:collapse}
-.grades th,.grades td{padding:8px;border-bottom:1px solid rgba(0,0,0,0.06)}
+body {
+    background: var(--dark);
+    font-family: "Times New Roman", Georgia, serif;
+    color: var(--dark);
+    min-height: 100vh;
+}
 
-@media (max-width:700px){.sidebar{display:none}.app{padding-left:0}.main{margin-left:0;padding:20px}}
+/* TELA DE LOGIN */
+
+.login-screen {
+    width: 100%;
+    height: 100vh;
+    background: var(--red);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.login-wrapper {
+    text-align: center;
+}
+
+.login-logo {
+    margin-bottom: 30px;
+}
+
+.logo-icon {
+    font-size: 60px;
+    color: var(--dark);
+}
+
+.logo-text {
+    margin-top: 5px;
+    font-size: 18px;
+    letter-spacing: 3px;
+    color: var(--dark);
+}
+
+.logo-king {
+    font-weight: bold;
+}
+
+.logo-school {
+    font-size: 16px;
+}
+
+/* CARTÃO LOGIN */
+
+.login-card {
+    background: var(--green);
+    padding: 25px 60px 30px;
+    border-radius: 20px;
+    display: inline-block;
+    min-width: 320px;
+}
+
+.login-card h2 {
+    margin-bottom: 20px;
+    font-size: 20px;
+}
+
+.login-card label {
+    display: block;
+    text-align: left;
+    margin-bottom: 5px;
+    font-size: 14px;
+}
+
+.login-card input {
+    width: 100%;
+    padding: 7px 10px;
+    border-radius: 15px;
+    border: none;
+    background: var(--white);
+    margin-bottom: 15px;
+    font-size: 14px;
+}
+
+.login-card button {
+    background: var(--dark-red);
+    color: var(--white);
+    border: none;
+    border-radius: 15px;
+    padding: 7px 40px;
+    font-size: 14px;
+    cursor: pointer;
+    margin-top: 5px;
+}
+
+.login-card button:hover {
+    filter: brightness(0.95);
+}
+
+.login-error {
+    margin-top: 10px;
+    font-size: 12px;
+    color: #660000;
+    display: none;
+}
+
+/* APLICATIVO PRINCIPAL */
+
+.app {
+    display: none;
+    width: 100%;
+    height: 100vh;
+}
+
+.app-wrapper {
+    width: 100%;
+    height: 100%;
+    background: var(--white);
+    display: flex;
+    flex-direction: column;
+}
+
+.top-strip {
+    height: 70px;
+    background: var(--red);
+}
+
+/* layout abaixo da faixa vermelha */
+.app-main {
+    flex: 1;
+    display: flex;
+}
+
+/* MENU LATERAL */
+
+.sidebar {
+    width: 260px;
+    background: var(--red);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 25px;
+    color: var(--light);
+}
+
+.sidebar-logo {
+    text-align: center;
+    margin-bottom: 25px;
+}
+
+.sidebar .logo-icon {
+    font-size: 55px;
+    color: var(--dark);
+}
+
+.sidebar .logo-text {
+    color: var(--dark);
+}
+
+.menu-panel {
+    background: var(--green);
+    border-radius: 20px;
+    padding: 20px 0;
+    width: 85%;
+}
+
+.menu-item {
+    width: 100%;
+    background: transparent;
+    border: none;
+    padding: 10px 30px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    font-size: 16px;
+    cursor: pointer;
+    color: var(--dark);
+    position: relative;
+}
+
+.menu-item + .menu-item {
+    border-top: 1px solid var(--dark);
+}
+
+.menu-icon {
+    margin-right: 15px;
+    font-size: 18px;
+}
+
+.menu-item.active {
+    background: rgba(216, 213, 201, 0.7);
+}
+
+/* ÁREA DE CONTEÚDO */
+
+.content-area {
+    flex: 1;
+    background: var(--white);
+    padding: 25px 40px 40px 40px;
+}
+
+.content-section {
+    display: none;
+    width: 100%;
+    height: 100%;
+}
+
+.content-section.active {
+    display: block;
+}
+
+.content-card {
+    background: var(--green);
+    border-radius: 25px;
+    padding: 25px 30px;
+    height: calc(100% - 10px);
+}
+
+/* Home */
+
+.content-card-full {
+    border-radius: 0;
+    background: var(--white);
+}
+
+/* Perfil */
+
+.perfil-card {
+    display: flex;
+    flex-direction: column;
+}
+
+.perfil-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 25px;
+}
+
+.perfil-avatar {
+    width: 140px;
+    height: 140px;
+    border-radius: 20px;
+    overflow: hidden;
+}
+
+.perfil-avatar img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center 10%;
+    border-radius: 20px;
+}
+
+.avatar-circle {
+    width: 90px;
+    height: 90px;
+    border-radius: 50%;
+    background: #c4c4c4;
+    position: relative;
+}
+
+.avatar-circle::before {
+    content: "";
+    position: absolute;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background: #b0b0b0;
+    top: 12px;
+    left: 15px;
+}
+
+.avatar-circle::after {
+    content: "";
+    position: absolute;
+    width: 70px;
+    height: 35px;
+    border-radius: 50px 50px 0 0;
+    background: #9b9b9b;
+    bottom: 10px;
+    left: 10px;
+}
+
+.perfil-title {
+    font-size: 20px;
+}
+
+.perfil-info p {
+    font-size: 16px;
+    margin-bottom: 5px;
+}
+
+.info-label {
+    font-weight: bold;
+}
+
+/* Minha turma */
+
+.turma-card {
+    overflow: hidden;
+    padding-top: 15px;
+}
+
+.turma-list {
+    height: 100%;
+    overflow-y: auto;
+    padding-right: 10px;
+}
+
+.turma-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.turma-avatar {
+    width: 60px;
+    height: 60px;
+    border-radius: 12px;
+    background: var(--light);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 20px;
+}
+
+.turma-avatar-inner {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: #c4c4c4;
+}
+
+.turma-nome {
+    font-size: 16px;
+}
+
+/* Atividades */
+
+.atividades-card {
+    text-align: center;
+    padding-top: 30px;
+}
+
+.atividades-header {
+    margin-bottom: 40px;
+    font-size: 18px;
+}
+
+.atividade-item {
+    background: var(--white);
+    border-radius: 25px;
+    padding: 20px 40px;
+    display: inline-block;
+    text-align: left;
+}
+
+.atividade-nome {
+    font-size: 18px;
+    margin-bottom: 5px;
+}
+
+.atividade-descricao {
+    font-size: 12px;
+}
+
+/* Matérias */
+
+.materias-card {
+    padding-top: 20px;
+}
+
+.materias-list {
+    list-style: none;
+}
+
+.materias-list li {
+    font-size: 17px;
+    padding: 6px 0;
+    border-bottom: 1px solid rgba(10, 13, 13, 0.5);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.materia-seta {
+    font-size: 18px;
+}
+
+/* Notas */
+
+.notas-card {
+    padding-top: 25px;
+}
+
+.notas-table-wrapper {
+    background: var(--light);
+    border-radius: 5px;
+    padding: 10px;
+    overflow-x: auto;
+}
+
+.notas-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 12px;
+}
+
+.notas-table th,
+.notas-table td {
+    border: 1px solid #999;
+    padding: 4px 6px;
+    text-align: center;
+}
+
+/* Coordenação */
+
+.coordenacao-card {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+}
